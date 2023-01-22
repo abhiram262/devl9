@@ -22,13 +22,10 @@ describe("Todo test suite ", () => {
     server.close();
   });
   test("Create new todo", async () => {
-    const res = await agent.get("/");
-    const csrfToken = extractCsrfToken(res);
     const response = await agent.post("/todos").send({
-      title: "Go to movie",
+      title: "By Milk",
       dueDate: new Date().toISOString(),
       completed: false,
-      _csrf: csrfToken,
     });
     expect(response.statusCode).toBe(302); //http status code
   });

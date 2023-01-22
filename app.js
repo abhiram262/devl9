@@ -4,6 +4,7 @@ var csrf = require("tiny-csrf");
 const bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 app.use(bodyParser.json());
+app.use(express.urlencoded({extended: False}));  
 const path = require("path");
 const { Todo } = require("./models");
 // eslint-disable-next-line no-unused-vars

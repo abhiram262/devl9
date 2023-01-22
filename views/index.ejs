@@ -14,14 +14,31 @@
           const updateTodo = (id) => {
           const bool = document.querySelector(`#checkbox-${id}`).checked
           console.log(bool);
-          fetch(`/todos/${id}`, {
-            method: "PUT",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body : JSON.stringify({
-            _csrf : token,
-            completed : bool
+          function updateTodo(id){
+            fetch(`/todos/${id}/markAsCompleted`, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },})
+              body : JSON.stringify({
+              _csrf : token,
+              completed : bool
+            })
+            .then((res) => {
+              if (res.ok) {
+                window.location.reload();
+              }
+            })
+            .catch(err);{
+              console.log(err);
+            }
+         };
+         function deleteTodo(id) {
+          fetch(`/todos/${id}`,{
+            method: "delete",
+            headers: {"Content-Type":"application/json"},
+            body: JSON.stringify({
+              "_csrf":token
             })
           })
           .then((res) => {
@@ -29,25 +46,8 @@
               window.location.reload();
             }
           })
-          .catch(err);{
-          console.log(err);
-          }
-        };
-            function deleteTodo(id) {
-        fetch(`/todos/${id}`,{
-          method: "delete",
-          headers: {"Content-Type":"application/json"},
-          body: JSON.stringify({
-            "_csrf":token
-          })
-        })
-         .then((res) => {
-          if (res.ok) {
-            window.location.reload();
-          }
-         })
-         .catch((err) => console.erroe(err));
-      }
+          .catch((err) => console.erroe(err));
+        }
         </script>
     </head>
     <body>
@@ -74,5 +74,5 @@
         <%- include('todos.ejs', {title: "Completed Items", data: completedItems}) %>
     </div>
 </div>
-    </body>
+  </body>
 </html>
