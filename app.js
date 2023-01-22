@@ -4,13 +4,13 @@ var csrf = require("tiny-csrf");
 const bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser");
 app.use(bodyParser.json());
-app.use(express.urlencoded({extended: False}));  
+app.use(express.urlencoded({ extended:False}));  
 const path = require("path");
 const { Todo } = require("./models");
 // eslint-disable-next-line no-unused-vars
 const todo = require("./models/todo");
 app.use(express.static(path.join(__dirname, "public")));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: False }));
 app.use(cookieParser("shh! some secret string"));
 app.use(csrf("this_should_be_32_character_long", ["POST", "PUT", "DELETE"]));
 
